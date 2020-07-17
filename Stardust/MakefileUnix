@@ -11,8 +11,8 @@ UTIL_OBJS = ../Utilities/src/Platform/Platform.o \
 ../Utilities/src/Events/Events.o \
 ../Utilities/src/Network/NetworkDriver.o \
 ../Utilities/src/Network/Socket.o \
-../Utilities/src/Network/ByteBuffer.o
-../Utilities/src/Utilities/Input.o
+../Utilities/src/Network/ByteBuffer.o \
+../Utilities/src/Utilities/Input.o \
 ../Utilities/src/Utilities/json/json_reader.o \
 ../Utilities/src/Utilities/json/json_value.o \
 ../Utilities/src/Utilities/json/json_writer.o \
