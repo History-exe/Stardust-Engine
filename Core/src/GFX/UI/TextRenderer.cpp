@@ -42,7 +42,7 @@ namespace Stardust::GFX::UI{
 	{
 		style = data;
 #if CURRENT_PLATFORM == PLATFORM_PSP
-		intraFontSetStyle(font, data.scale, GU_RGBA(data.r, data.g, data.b, data.a), data.shadow ? 0xFF333333 : 0, data.angle, INTRAFONT_ALIGN_CENTER);
+		intraFontSetStyle(font, data.scale, GU_RGBA(data.r, data.g, data.b, data.a), data.shadow ? 0xFF333333 : 0, data.angle, data.align_h);
 #endif
 	}
 	void TextRenderer::draw(std::string text, glm::ivec2 pos)
