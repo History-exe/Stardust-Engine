@@ -11,8 +11,9 @@
 #include <GFX/RenderCore.h>
 #endif
 
-#if CURRENT_PLATFORM == PLATFORM_PSP
 #include <Utilities/Input.h>
+
+#if CURRENT_PLATFORM == PLATFORM_PSP
 
 #include <psppower.h>
 #include <pspkernel.h>
@@ -73,9 +74,10 @@ namespace Stardust::Platform {
 	void platformUpdate()
 	{
 #if CURRENT_PLATFORM == PLATFORM_PSP
-		Utilities::updateInputs();
 		oslAudioVSync();
 #endif
+
+		Utilities::updateInputs();
 #if (CURRENT_PLATFORM == PLATFORM_WIN) || (CURRENT_PLATFORM == PLATFORM_NIX)
 		PC::g_Window->update();
 		if(PC::g_Window->shouldClose()){

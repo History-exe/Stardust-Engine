@@ -4,6 +4,7 @@
 #include <GFX/GFXWrapper.h>
 #include <GFX/2D/TilemapAnim.h>
 #include <GFX/UI/TextRenderer.h>
+#include <Utilities/Input.h>
 using namespace Stardust;
 
 int main() {
@@ -42,15 +43,10 @@ int main() {
 	GFX::UI::TextRenderer* txt = new GFX::UI::TextRenderer();
 	txt->init("./assets/font.pgf");
 	
-	while (true) {
+	while (!Utilities::KeyPressed(GLFW_KEY_ESCAPE) && !Utilities::KeyPressed(PSP_CTRL_START)) {
 		GFX::g_RenderCore->beginFrame();
 
-		r += 1.0f;
-		if (r >= 1.0f) {
-			r = 0.0f;
-			tmap->tickPhase();
-		}
-
+		
 		GFX::g_RenderCore->setClearColor(0.0f, 0.2f, 0.2f, 1.0f);
 		GFX::g_RenderCore->clear();
 

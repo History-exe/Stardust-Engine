@@ -45,6 +45,10 @@ namespace Stardust::Platform::PC {
 			return glfwWindowShouldClose(m_Window);
 		}
 
+		inline GLFWwindow* getWindow(){
+			return m_Window;
+		}
+
 		inline void setFullScreen(bool fs) {
 			fullScreen = fs;
 

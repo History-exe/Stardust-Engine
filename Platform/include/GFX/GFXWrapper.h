@@ -229,10 +229,14 @@ namespace Stardust::GFX {
     class Model{
     public:
         Model() {
+#if (CURRENT_PLATFORM == PLATFORM_WIN) || (CURRENT_PLATFORM == PLATFORM_NIX)
             vao = 0;
+#endif
         }
         Model(const Mesh& mesh) {
+#if (CURRENT_PLATFORM == PLATFORM_WIN) || (CURRENT_PLATFORM == PLATFORM_NIX)
             vao = 0;
+#endif
             addData(mesh);
         }
         ~Model(){

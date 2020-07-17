@@ -149,6 +149,10 @@
     <ClCompile Include="src\Network\Socket.cpp" />
     <ClCompile Include="src\Platform\Platform.cpp" />
     <ClCompile Include="src\Profiler\Profiler.cpp" />
+    <ClCompile Include="src\Utilities\Input.cpp" />
+    <ClCompile Include="src\Utilities\json\json_reader.cpp" />
+    <ClCompile Include="src\Utilities\json\json_value.cpp" />
+    <ClCompile Include="src\Utilities\json\json_writer.cpp" />
     <ClCompile Include="src\Utilities\Logger.cpp" />
     <ClCompile Include="src\Utilities\Thread.cpp" />
     <ClCompile Include="src\Utilities\Timer.cpp" />
@@ -172,6 +176,10 @@
     <ClInclude Include="include\Utilities\Thread.h" />
     <ClInclude Include="include\Utilities\Timer.h" />
     <ClInclude Include="include\Utilities\UUID.h" />
+    <ClInclude Include="src\Utilities\json\json_tool.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Utilities\json\json_valueiterator.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

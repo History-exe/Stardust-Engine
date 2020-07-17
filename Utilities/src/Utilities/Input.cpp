@@ -7,10 +7,12 @@
 #include <iostream>
 
 namespace Stardust::Utilities {
-	SceCtrlData oldPadData;
-	SceCtrlData newPadData;
+
 	std::map<std::string, int> mymap;
 	std::map<std::string, ActionHandler> handles;
+#if CURRENT_PLATFORM == PLATFORM_PSP
+	SceCtrlData oldPadData;
+	SceCtrlData newPadData;
 
 float getX()
 {
@@ -21,11 +23,16 @@ float getY()
 {
 	return (((float)newPadData.Ly - 122.5f) / 122.5f); //Range of +/- 1.0f
 }
+#endif 
 
 	void updateInputs()
 	{
+
+#if CURRENT_PLATFORM == PLATFORM_PSP
 		oldPadData = newPadData;
 		sceCtrlReadBufferPositive(&newPadData, 1);
+#endif
+		//ON PC this is handled by Platform Update anyways.
 
 		for (auto& [key, but] : mymap) {
 			if (KeyHold(but) || KeyPressed(but)) {
@@ -38,6 +45,7 @@ float getY()
 	}
 	bool KeyPressed(int key)
 	{
+#if CURRENT_PLATFORM == PLATFORM_PSP
 		if (key == PSP_CTRL_ANALOG_X) {
 			if (getX() > 0.3f || getX() < -0.3f) {
 				return true;
@@ -56,11 +64,18 @@ float getY()
 				return true;
 			}
 		}
-
 		return false;
+#else
+		//Filter out phony PSP keys
+		if (key != -1) {
+			return glfwGetKey(Platform::PC::g_Window->getWindow(), key) == GLFW_PRESS;
+		}
+		return false;
+#endif
 	}
 	bool KeyHold(int key)
 	{
+#if CURRENT_PLATFORM == PLATFORM_PSP
 		if (key == PSP_CTRL_ANALOG_X) {
 			if (getX() > 0.3f || getX() < -0.3f) {
 				return true;
@@ -78,17 +93,28 @@ float getY()
 		}
 
 		return false;
+#else
+		return glfwGetKey(Platform::PC::g_Window->getWindow(), key) == GLFW_REPEAT;
+#endif
 	}
 	float KeyStrength(int key)
 	{
+
+#if CURRENT_PLATFORM == PLATFORM_PSP
 		if (key == PSP_CTRL_ANALOG_X) {
 			return getX();
 		}
 		if (key == PSP_CTRL_ANALOG_Y) {
 			return getY();
 		}
+#endif
 
-		if (KeyHold(key)) {
+		if (KeyHold(key) || KeyPressed(key)) {
+			return 1.0f;
+		}
+		return 0.0f;
+
+		if (KeyHold(key) || KeyPressed(key)) {
 			return 1.0f;
 		}
 		return 0.0f;
@@ -119,6 +145,9 @@ float getY()
 	{
 		handles.clear();
 	}
+
+
+#if CURRENT_PLATFORM == PLATFORM_PSP
 	std::string toString(int but)
 	{
 		switch(but){
@@ -189,6 +218,7 @@ float getY()
 
 		return "Unbound";
 	}
+#endif
 	void LoadConfiguration(std::string path)
 	{
 		mymap.clear();
@@ -236,6 +266,8 @@ float getY()
 		return mymap[s];
 	}
 
+
+#if CURRENT_PLATFORM == PLATFORM_PSP
 	int nextAction()
 {
 
@@ -310,4 +342,19 @@ float getY()
 
 	return (int)0;
 }
+#endif
+	glm::vec2 getCursorPos()
+	{
+#if CURRENT_PLATFORM == PLATFORM_PSP
+		return glm::vec2(-1, -1);
+#else
+
+		double curX, curY;
+		curX = curY = -1.0;
+
+		glfwGetCursorPos(Platform::PC::g_Window->getWindow(), &curX, &curY);
+
+		return glm::vec2((float)curX, (float)curY);
+#endif
+	}
 }
