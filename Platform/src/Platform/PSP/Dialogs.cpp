@@ -79,7 +79,7 @@ namespace Stardust::Platform::PSP{
 		while (done)
 		{
 			Platform::detail::Graphics::beginFrameDialog();
-
+			sceGuClear(GU_COLOR_BUFFER_BIT);
 			switch (sceUtilityNetconfGetStatus())
 			{
 			case PSP_UTILITY_DIALOG_NONE:
@@ -130,6 +130,7 @@ namespace Stardust::Platform::PSP{
 		{
 			
 			Platform::detail::Graphics::beginFrameDialog();;
+			sceGuClear(GU_COLOR_BUFFER_BIT);
 
 			switch (sceUtilityMsgDialogGetStatus()) {
 
@@ -197,6 +198,7 @@ namespace Stardust::Platform::PSP{
 		{
 			
 			Platform::detail::Graphics::beginFrameDialog();;
+			sceGuClear(GU_COLOR_BUFFER_BIT);
 
 			switch (sceUtilityOskGetStatus())
 			{
@@ -248,6 +250,7 @@ namespace Stardust::Platform::PSP{
 
 			
 			Platform::detail::Graphics::beginFrameDialog();;
+			sceGuClear(GU_COLOR_BUFFER_BIT);
 
 			int test = sceUtilityMsgDialogGetStatus();
 
