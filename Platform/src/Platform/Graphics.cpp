@@ -50,6 +50,7 @@ namespace Stardust::Platform::detail::Graphics {
 #if CURRENT_PLATFORM == PLATFORM_PSP
 	void beginFrameDialog() {
 		sceGuStart(GU_DIRECT, list);
+		sceGuClear(GU_COLOR_BUFFER_BIT);
 		sceGuFinish();
 		sceGuSync(0, 0);
 	}
