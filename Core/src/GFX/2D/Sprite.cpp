@@ -13,6 +13,33 @@ namespace Stardust::GFX::Render2D{
 		model.deleteData();
 	}
 
+	Sprite::Sprite(unsigned int t)
+	{
+		tex = t;
+
+		Texture* tex2 = g_TextureManager->getTex(t);
+
+		scaleFactor = { 1.0, 1.0 };
+		mesh.position = {
+		   -tex2->width / 2.0f,-tex2->height / 2.0f, 0, //0
+			tex2->width / 2.0f,-tex2->height / 2.0f, 0, //1
+			tex2->width / 2.0f, tex2->height / 2.0f, 0, //2
+		   -tex2->width / 2.0f, tex2->height / 2.0f, 0, //3
+		};
+
+
+		mesh.color = {
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 1.0f, 1.0f,
+		};
+
+		Texture* tD = g_TextureManager->getTex(t);
+		float hPercent = (float)tD->height / (float)tD->pHeight;
+		float wPercent = (float)tD->width / (float)tD->pWidth;
+	}
+
 	Sprite::Sprite(unsigned int t, glm::vec2 size)
 	{
 		tex = t;
