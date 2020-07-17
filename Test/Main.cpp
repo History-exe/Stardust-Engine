@@ -45,13 +45,13 @@ int main() {
 	while (true) {
 		GFX::g_RenderCore->beginFrame();
 
-		r += 0.005f;
+		r += 1.0f;
 		if (r >= 1.0f) {
 			r = 0.0f;
-			//tmap->tickPhase();
+			tmap->tickPhase();
 		}
 
-		GFX::g_RenderCore->setClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		GFX::g_RenderCore->setClearColor(0.0f, 0.2f, 0.2f, 1.0f);
 		GFX::g_RenderCore->clear();
 
 		//Main loop
