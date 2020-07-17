@@ -228,8 +228,11 @@ namespace Stardust::GFX {
      */
     class Model{
     public:
-        Model() = default;
-        Model(const Mesh& mesh){
+        Model() {
+            vao = 0;
+        }
+        Model(const Mesh& mesh) {
+            vao = 0;
             addData(mesh);
         }
         ~Model(){
@@ -252,7 +255,7 @@ namespace Stardust::GFX {
         }
 
         inline void genEBO(const std::vector<GLuint>& indices){
-            GLuint ebo;
+            
             glGenBuffers(1, &ebo);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
@@ -320,12 +323,11 @@ namespace Stardust::GFX {
             glDeleteVertexArrays(1, &vao);
             glDeleteBuffers(buffers.size(), buffers.data());
 
+            glDeleteBuffers(1, &ebo);
             buffers.clear();
+            buffers.shrink_to_fit();
 
             buffer_count = 0;
-            colFl = false;
-            texFl = false;
-            idxFl = false;
             indicesCount = 0;
 #else
 #error No Graphics Model Data Deletion
@@ -374,9 +376,6 @@ namespace Stardust::GFX {
 #endif
         }
     private:
-        bool colFl;
-        bool texFl;
-        bool idxFl;
         int indicesCount;
 
 #if CURRENT_PLATFORM == PLATFORM_PSP
@@ -387,6 +386,7 @@ namespace Stardust::GFX {
         GLuint vao;
         int buffer_count;
         std::vector<GLuint> buffers;
+        GLuint ebo;
 #endif
     };
 
