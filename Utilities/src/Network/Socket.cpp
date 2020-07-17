@@ -31,6 +31,17 @@ namespace Stardust::Network {
 		return Platform::detail::closeSockets(m_socket);
 	}
 
+	Socket::~Socket(){
+	
+	}
+	ClientSocket::~ClientSocket(){
+	
+	}
+
+	ServerSocket::~ServerSocket(){
+	
+	}
+
 	ServerSocket::ServerSocket(unsigned short port)
 	{
 		m_socket = socket(AF_INET, SOCK_STREAM, 0);
