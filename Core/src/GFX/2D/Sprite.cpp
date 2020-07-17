@@ -38,6 +38,19 @@ namespace Stardust::GFX::Render2D{
 		Texture* tD = g_TextureManager->getTex(t);
 		float hPercent = (float)tD->height / (float)tD->pHeight;
 		float wPercent = (float)tD->width / (float)tD->pWidth;
+
+		mesh.uv = {
+			0, 0,
+			hPercent, 0,
+			hPercent, wPercent,
+			0, wPercent
+		};
+
+		mesh.indices = {
+			3, 2, 1, 1, 0, 3
+		};
+
+		model.addData(mesh);
 	}
 
 	Sprite::Sprite(unsigned int t, glm::vec2 size)
