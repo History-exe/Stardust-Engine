@@ -28,9 +28,9 @@ CORE_OBJS = ../Core/src/Core/Core.o \
 ../Core/src/GFX/3D/Camera.o \
 ../Core/src/GFX/UI/TextRenderer.o \
 
-util_lib = lib/nix/libstardust-utilities.a
-plat_lib = lib/nix/libstardust-platform.a
-core_lib = lib/nix/libstardust-core.a
+util_lib = lib/mac/libstardust-utilities.a
+plat_lib = lib/mac/libstardust-platform.a
+core_lib = lib/mac/libstardust-core.a
 
 CC = clang
 CXX= clang++
