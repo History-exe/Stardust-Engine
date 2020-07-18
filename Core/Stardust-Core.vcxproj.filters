@@ -54,6 +54,9 @@
     <ClInclude Include="include\GFX\UI\TextRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\GFX\3D\Skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Core.cpp">
@@ -84,6 +87,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GFX\UI\TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GFX\3D\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
