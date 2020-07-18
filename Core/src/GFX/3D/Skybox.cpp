@@ -4,7 +4,7 @@ namespace Stardust::GFX::Render3D{
 	Skybox::Skybox(std::array<std::string, 6> fileNames, float zDist)
 	{
 		for(int i = 0; i < 6; i++){
-			texID[i] = g_TextureManager->loadTex(fileNames[i], GFX_FILTER_NEAREST, GFX_FILTER_NEAREST, false);
+			texID[i] = g_TextureManager->loadTex(fileNames[i], GFX_FILTER_LINEAR, GFX_FILTER_LINEAR, false);
 		}
 
 		for (int i = 0; i < 6; i++) {
