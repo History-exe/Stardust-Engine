@@ -1,10 +1,5 @@
-#include <GFX/UI/TextRenderer.h>
-
-#if CURRENT_PLATFORM != PLATFORM_PSP
 #define GLT_IMPLEMENTATION
-#define GLT_MANUAL_VIEWPORT
-#include <gltext.h>
-#endif
+#include <GFX/UI/TextRenderer.h>
 
 namespace Stardust::GFX::UI{
 	TextRenderer::TextRenderer()

@@ -78,7 +78,9 @@ namespace Stardust::GFX::Render3D{
 
 	Skybox::~Skybox()
 	{
-
+		for (int i = 0; i < 6; i++) {
+			g_TextureManager->deleteTex(texID[i]);
+		}
 	}
 
 	void Skybox::draw()
