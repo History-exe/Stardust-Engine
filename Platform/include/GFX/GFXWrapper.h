@@ -39,6 +39,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 /**
  * A general purpose OpenGL-like Graphics Wrapper for Stardust.
@@ -359,7 +360,6 @@ namespace Stardust::GFX {
             
             glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_FALSE, glm::value_ptr(_gfx_proj));
             glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, glm::value_ptr(_gfx_view));
-
             glm::mat4 newModel = glm::mat4(1.0f);
 
             for (int i = 0; i < _matrixStack.size(); i++) {
@@ -369,7 +369,6 @@ namespace Stardust::GFX {
 
 
             glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, glm::value_ptr(newModel));
-
             //Bind VAO
             bind();
 
@@ -711,23 +710,23 @@ namespace Stardust::GFX {
 #endif
     }
 
-    inline void gfxSetProjView(glm::mat4 proj, glm::mat4 view) {
 #if CURRENT_PLATFORM == PLATFORM_PSP
+    inline void gfxSetProjView(ScePspFMatrix4 proj, ScePspFMatrix4 view) {
         sceGumMatrixMode(GU_PROJECTION);
-        ScePspFMatrix4 m = *((ScePspFMatrix4*)glm::value_ptr(proj));
-        sceGumLoadMatrix(&m);
+        sceGumLoadMatrix(&proj);
 
         sceGumMatrixMode(GU_VIEW);
-        ScePspFMatrix4 m1 = *((ScePspFMatrix4*)glm::value_ptr(view));
-        sceGumLoadMatrix(&m1);
+        sceGumLoadMatrix(&view);
+    }
 
 #elif (CURRENT_PLATFORM == PLATFORM_WIN) || (CURRENT_PLATFORM == PLATFORM_NIX)
+    inline void gfxSetProjView(glm::mat4 proj, glm::mat4 view) {
         _gfx_proj = proj;
         _gfx_view = view;
+    }
 #else
 #error No GFX Matrix Scale.
 #endif
-    }
 
     inline void gfxSetView(glm::mat4 view) {
 #if CURRENT_PLATFORM == PLATFORM_PSP

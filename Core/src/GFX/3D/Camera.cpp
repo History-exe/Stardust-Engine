@@ -7,6 +7,7 @@ namespace Stardust::GFX::Render3D {
 		pos = position;
 		rot = rotation;
 
+
 		setProjection(fovy, aspect, zN, zF);
 		update();
 	}
@@ -18,15 +19,40 @@ namespace Stardust::GFX::Render3D {
 		zNear = zN;
 		zFar = zF;
 
-		proj = glm::perspective(fovy, aspect, zN, zF);
+#if CURRENT_PLATFORM == PLATFORM_PSP
+		sceGumMatrixMode(GU_PROJECTION);
+		sceGumLoadIdentity();
+		sceGumPerspective(fovy, aspect, zN, zF);
+		sceGumStoreMatrix(&proj);
+#else
+		proj = glm::perspective(glm::radians(fovy), aspect, zN, zF);
+#endif
 	}
 
 	void Camera::update()
 	{
-		view = glm::mat4(1.0f);
+#if CURRENT_PLATFORM == PLATFORM_PSP
+		sceGumMatrixMode(GU_VIEW);
+		sceGumLoadIdentity();
 
-		glm::rotate(view, rot.x / 180.0f * 3.14159f, { 1, 0, 0 });
-		glm::rotate(view, rot.y / 180.0f * 3.14159f, { 0, 1, 0 });
-		glm::rotate(view, rot.z / 180.0f * 3.14159f, { 0, 0, 1 });
+		sceGumRotateX(rot.x / 180.0f * 3.14159f);
+		sceGumRotateY(rot.y / 180.0f * 3.14159f);
+		sceGumRotateZ(rot.z / 180.0f * 3.14159f);
+		ScePspFVector3 v = { pos.x, pos.y, pos.z };
+		sceGumTranslate(&v);
+		sceGumStoreMatrix(&view);
+
+		sceGumMatrixMode(GU_MODEL);
+#else
+		glm::mat4 matrix(1.f);
+
+		matrix = glm::rotate(matrix, glm::radians(rot.x), { 1, 0, 0 });
+		matrix = glm::rotate(matrix, glm::radians(rot.y), { 0, 1, 0 });
+		matrix = glm::rotate(matrix, glm::radians(rot.z), { 0, 0, 1 });
+
+		matrix = glm::translate(matrix, -pos);
+
+		view =  matrix;
+#endif
 	}
 }

@@ -56,6 +56,9 @@ namespace Stardust::GFX {
 	void RenderCore::beginFrame()
 	{
 		Platform::detail::Graphics::beginFrame();
+		if(renderCam != NULL){
+			gfxSetProjView(renderCam->getProjection(), renderCam->getView());
+		}
 	}
 	void RenderCore::endFrame()
 	{

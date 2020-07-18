@@ -15,7 +15,7 @@ namespace Stardust::GFX::Render3D{
 				1.0f, 1.0f, 1.0f, 1.0f,
 			};
 			face[i].indices = {
-				0, 1, 2, 2, 3, 0
+				3, 2, 1, 1, 0, 3
 			};
 
 			face[i].uv = {
@@ -27,46 +27,47 @@ namespace Stardust::GFX::Render3D{
 		}
 
 		face[0].position = {
-			zDist, -zDist, -zDist,
 			zDist, zDist, -zDist,
 			zDist, zDist, zDist,
 			zDist, -zDist, zDist,
+			zDist, -zDist, -zDist,
 		};
 
 
 		face[1].position = {
-			-zDist, -zDist, zDist,
 			-zDist, zDist, zDist,
 			-zDist, zDist, -zDist,
 			-zDist, -zDist, -zDist,
+			-zDist, -zDist, zDist,
 		};
 
+
 		face[2].position = {
-			-zDist, -zDist, zDist,
-			-zDist, zDist, zDist,
 			zDist, zDist, zDist,
+			-zDist, zDist, zDist,
+			-zDist, -zDist, zDist,
 			zDist, -zDist, zDist,
 		};
 
 		face[3].position = {
-			-zDist, -zDist, -zDist,
 			-zDist, zDist,	-zDist,
 			zDist, zDist,	-zDist,
 			zDist, -zDist,	-zDist,
+			-zDist, -zDist, -zDist,
 		};
 
 		face[4].position = {
-			-zDist, -zDist, -zDist,
 			zDist, -zDist, -zDist,
 			zDist, -zDist, zDist,
 			-zDist, -zDist, zDist,
+			-zDist, -zDist, -zDist,
 		};
 
 		face[5].position = {
-			-zDist, zDist, -zDist,
-			zDist,  zDist, -zDist,
-			zDist,  zDist, zDist,
-			-zDist, zDist, zDist,
+		   -zDist,	zDist, -zDist,
+		   -zDist,	zDist,	zDist,
+			zDist,	zDist,	zDist,
+			zDist,	zDist, -zDist,
 		};
 
 		for(int i = 0; i < 6; i++){
@@ -82,7 +83,7 @@ namespace Stardust::GFX::Render3D{
 
 	void Skybox::draw()
 	{
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 6; i++){
 			g_TextureManager->bindTex(texID[i]);
 			faces[i].draw();
 		}
