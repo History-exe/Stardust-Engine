@@ -118,14 +118,14 @@ namespace Stardust::GFX::Render2D{
 		};
 
 		mesh.position = {
-			0, 0, 0,
-			pos.x, 0, 0,
-			pos.x, extent.y, 0,
-			0, extent.y, 0,
+		   -extent.x / 2.0f,-extent.y / 2.0f, 0, //0
+			extent.x / 2.0f,-extent.y / 2.0f, 0, //1
+			extent.x / 2.0f, extent.y / 2.0f, 0, //2
+		   -extent.x / 2.0f, extent.y / 2.0f, 0, //3
 		};
 
 		mesh.indices = {
-			0, 1, 2, 2, 3, 0
+			3, 2, 1, 1, 0, 3
 		};
 
 		model.addData(mesh);
