@@ -30,23 +30,32 @@ namespace Stardust::GFX::UI{
 
 	void UIButton::update()
 	{
+#if CURRENT_PLATFORM != PLATFORM_PSP
 		glm::vec2 newPos = Utilities::getCursorPos();
+
+		glm::vec2 windowSize = { Platform::PC::g_Window->getWidth(), Platform::PC::g_Window->getHeight() };
+
+		newPos /= windowSize;
+		std::cout << glm::to_string(newPos) << std::endl;
+
+		glm::vec2 scale = { 480, 272 };
+
+		newPos *= scale;
 
 		if(newPos != cursorLastPos){
 			cursorLastPos = newPos;
 			isSelected = false;
 		}
 
-		if(newPos.x > position.x && newPos.x < position.x + hitbox.x){
-			if (newPos.y > position.y && newPos.y < position.y + hitbox.y) {
+		if(newPos.x > position.x - hitbox.x / 2.0f && newPos.x < position.x + hitbox.x / 2.0f){
+			if (newPos.y > position.y - hitbox.y / 2.0f && newPos.y < position.y + hitbox.y / 2.0f) {
 				isSelected = true;
-#if CURRENT_PLATFORM != PLATFORM_PSP
 				if(glfwGetMouseButton(Platform::PC::g_Window->getWindow(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
 					click();
 				}
-#endif
 			}
 		}
+#endif
 	}
 
 	void UIButton::draw()
