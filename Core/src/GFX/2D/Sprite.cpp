@@ -175,12 +175,14 @@ namespace Stardust::GFX::Render2D{
 		//Matrix translation
 		GFX::pushMatrix();
 		GFX::clearModelMatrix();
-		GFX::scaleModelMatrix(glm::vec3(scaleFactor.x, scaleFactor.y, 1.0f));
 		GFX::translateModelMatrix(glm::vec3(offset.x, offset.y, 1.0f));
+		GFX::pushMatrix();
+		GFX::scaleModelMatrix(glm::vec3(scaleFactor.x, scaleFactor.y, 1.0f));
 
 		g_TextureManager->bindTex(tex);
 		model.draw();
 
+		GFX::popMatrix();
 		GFX::popMatrix();
 	}
 	

@@ -59,6 +59,8 @@ namespace Stardust::GFX::UI{
 
 	void UIButton::draw()
 	{
+		selected->setPosition(position.x, position.y);
+		unselected->setPosition(position.x, position.y);
 		if(isSelected){
 			selected->draw();
 		}else{
@@ -70,8 +72,6 @@ namespace Stardust::GFX::UI{
 
 	void UIButton::setPosition(int x, int y)
 	{
-		selected->setPosition(x, y);
-		unselected->setPosition(x, y);
 		position = { x, y };
 	}
 	void UIButton::setSize(glm::vec2 size)
