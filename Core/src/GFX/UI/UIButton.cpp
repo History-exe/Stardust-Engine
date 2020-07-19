@@ -36,7 +36,6 @@ namespace Stardust::GFX::UI{
 		glm::vec2 windowSize = { Platform::PC::g_Window->getWidth(), Platform::PC::g_Window->getHeight() };
 
 		newPos /= windowSize;
-		std::cout << glm::to_string(newPos) << std::endl;
 
 		glm::vec2 scale = { 480, 272 };
 

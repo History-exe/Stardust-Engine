@@ -48,12 +48,14 @@ namespace Stardust::GFX::UI{
 		GLTtext* txt = gltCreateText();
 		gltSetText(txt, text.c_str());
 
+		glDisable(GL_DEPTH_TEST);
 		gltBeginDraw();
 
 		gltColor( (float)style.r / 255.0f, (float)style.g / 255.0f, (float)style.b / 255.0f, (float)style.a / 255.0f);
 		gltDrawText2DAligned(txt, pos.x, pos.y, style.scale, style.align_h, style.align_v);
 
 		gltEndDraw();
+		glEnable(GL_DEPTH_TEST);
 
 		gltDeleteText(txt);
 #endif
