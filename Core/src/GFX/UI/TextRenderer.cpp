@@ -2,6 +2,9 @@
 #include <GFX/UI/TextRenderer.h>
 
 namespace Stardust::GFX::UI{
+
+
+	int textVShift = 4;
 	TextRenderer::TextRenderer()
 	{
 
@@ -43,7 +46,7 @@ namespace Stardust::GFX::UI{
 	void TextRenderer::draw(std::string text, glm::ivec2 pos)
 	{
 #if CURRENT_PLATFORM == PLATFORM_PSP
-		intraFontPrint(font, pos.x, pos.y, text.c_str());
+		intraFontPrint(font, pos.x, pos.y + textVShift, text.c_str());
 #else
 		GLTtext* txt = gltCreateText();
 		gltSetText(txt, text.c_str());

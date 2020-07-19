@@ -53,4 +53,6 @@ namespace Stardust::GFX::UI{
 #endif
 		FontStyle style;
 	};
+
+	extern int textVShift;
 }
